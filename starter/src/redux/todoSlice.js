@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 
-const getTodoAsync = createAsyncThunk(
+export const getTodoAsync = createAsyncThunk(
   'todos/getTodoAsync',
   async () => {
     const response = await fetch('http://localhost:7000/todos');
@@ -10,6 +10,7 @@ const getTodoAsync = createAsyncThunk(
     }
   }
 )
+
 const todoSlice = createSlice({
   name: 'todos',
   initialState: [
@@ -39,7 +40,12 @@ const todoSlice = createSlice({
     }
   },
   extraReducers: {
-    [getTodoAsync.fulfilled]
+    [getTodoAsync.pending]: (state, action) => {
+      console.log('fetching data')
+    },
+    [getTodoAsync.fulfilled]: (state, action) => {
+      return action.payload.todos;
+    },
   }
 })
 
