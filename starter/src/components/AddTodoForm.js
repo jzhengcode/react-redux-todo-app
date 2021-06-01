@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useDispatch, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { addTodo } from '../redux/todoSlice';
 
 const AddTodoForm = () => {
